@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Tahoma" Size="8.25" />
+  <Class Name="StatisProBaseball.clsBase">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>clsBase.vb</FileName>
+      <HashCode>AEgQAAAAAAAAAAAAAAAAAAgAAAAAAAJAAAAACQBAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatisProBaseball.clsBatStat">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>clsStat.vb</FileName>
+      <HashCode>QAEEBAAAAEBKAAAEQACQKCQSSABJAAAgAAAA58FdAwI=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatisProBaseball.clsBatter">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>clsBatter.vb</FileName>
+      <HashCode>AQCAeEAEAQIRoAAAAUxIaACEEEeBYCABoRhRiABZREQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatisProBaseball.clsGame">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>clsGame.vb</FileName>
+      <HashCode>ABAAkBGBEACAEIJiAECIDAAABAAAAAAABAggKABAIYQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StatisProBaseball.clsLineup">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>clsLineup.vb</FileName>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAIAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+</ClassDiagram>

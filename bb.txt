@@ -1,0 +1,17 @@
+About a year ago I released my first PC version of Statis Pro to this user group. Many of you requested a copy and tried it out. A few provided some tremendous feedback, especially Glyn Lovelock. I spent much of December implementing many feature requests, and most of January testing them. This latest version is now available to all that are interested. 
+
+I played tabletop Statis Pro for 15 years before developing my original PC version in 2001. I truly enjoy it in that I can play a game much faster without recording statistics, creating box scores, and turning cards. It has allowed me to play 5 entire seasons since then (82 thru 86), even with the demands of raising a young family.
+
+The version I have tested and ready to send is for 2008 (Manny Ramirez's card with LA is unbelievable). However, I can build any season since 1901 in just a few minutes. If you would like a version other than 2008, let me know.
+
+The game is completely free, as well as any season you would like to play. If you truly insist on paying for this version, you can make a donation to the Sean Lahman baseball site (www.baseball1.com), who provided the database used in this game. The database is truly remarkable and some of you may enjoy perusing through it. To request a copy, just send me an email at boerwinb@wowway.com. If the group owner wouldn't mind, I would like post my game to the Statis Pro folder of this user group. It would save me quite a bit of time.
+
+New features since the first version include:
+
+An actual install program!!! The manual install of the first version may have scared some of you away. I apologize for that. When running the install, choose a simple install path in case you want to modify the schedule or the player cards. Just follow the prompts for the install. The game will require you to install Windows Installer 3.1 and .NET Framework 2.0. If you are connected to the web while installing, the install will point you to appropriate downloads if needed.
+
+An FAC viewer. It will not show the full card, but the actual data item used from the card. For example, the first row in the viewer may show PB: 7, and the next row will show Random: 27. In other words, each row represents an FAC card being turned.
+
+Optional Features. I have added optional features including Advance Base Advance rules, Individual vs Team batting cards for pitchers, the pitcher "Stuff" advanced rule, Points of Effectiveness, Full BD and Full CD. You can change these setting by modifying your statisprobaseball.exe.config file. 
+
+Outs stretching hits. I did some research and found that about 1 out of 130 base hits resulted in a batter being tagged out attempting to stretch the hit. I have implemented this feature with the same probability.

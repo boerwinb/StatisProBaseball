@@ -1,0 +1,743 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UpgradeLog>
+    <Settings>
+        <Setting
+            Name = "LogFile"
+            Value = "Baseball.log"
+        />
+        <Setting
+            Name = "GenerateInterfacesForClasses"
+            Value = "FALSE"
+        />
+        <Setting
+            Name = "ProjectName"
+            Value = "Baseball"
+        />
+        <Setting
+            Name = "OutputName"
+            Value = "Baseball.vbproj"
+        />
+        <Setting
+            Name = "OutputDir"
+            Value = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET"
+        />
+        <Setting
+            Name = "ProjectPath"
+            Value = "C:\documents\BBBackupsDotNet\Baseball.vbp"
+        />
+        <Setting
+            Name = "MigrateProjectTo"
+            Value = "0"
+        />
+    </Settings>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmSettings.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmSettings.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "(Layout)" >
+            <Issue
+                Type = "Design"
+                Number = "2045"
+                ObjectName = "lblCD_21"
+                ObjectType = "Label"
+                PME = "Font"
+            >Only TrueType and OpenType fonts are supported in Windows Forms.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2056"
+                ObjectName = "cmbPos_0"
+                ObjectType = "ComboBox"
+                PME = "ItemData"
+            >ComboBox property cmbPos.ItemData was not upgraded.</Issue>
+        </Section>
+        <Section Name = "cmbPos_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2075"
+            >Event cmbPos.SelectedIndexChanged may fire when form is intialized.</Issue>
+        </Section>
+        <Section Name = "ValidPositions" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object strPositions.</Issue>
+        </Section>
+        <Section Name = "fraBatter_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2050"
+                ObjectName = "fraBatter"
+                ObjectType = "Frame"
+                PME = "Click"
+            >Frame Event fraBatter.Click was not upgraded.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsTeam.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsTeam.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    >
+        <Section Name = "fraBatter_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object conMaxBatters.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object conMaxPitchers.</Issue>
+        </Section>
+        <Section Name = "(Declarations)" >
+            <Issue
+                Type = "Runtime"
+                Number = "1033"
+            >Lower bound of array mvarLineUp was changed from 1 to 0.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsBatter.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsBatter.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsPitcher.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsPitcher.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\modConstants.bas"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\modConstants.vb"
+        FileType = "Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\modStartup.bas"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\modStartup.vb"
+        FileType = "Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmStartup.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmStartup.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "(Layout)" >
+            <Issue
+                Type = "Design"
+                Number = "2056"
+                ObjectName = "cmbHome"
+                ObjectType = "ComboBox"
+                PME = "ItemData"
+            >ComboBox property cmbHome.ItemData was not upgraded.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2064"
+                ObjectName = "cmdRosters"
+                ObjectType = "CommandButton"
+                PME = "MaskColor"
+            >CommandButton property cmdRosters.MaskColor was not upgraded.</Issue>
+        </Section>
+        <Section Name = "Form_Load" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+        </Section>
+        <Section Name = "optMode_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2075"
+            >Event optMode.CheckedChanged may fire when form is intialized.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\modRoutines.bas"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\modRoutines.vb"
+        FileType = "Module"
+        Upgraded = "True"
+    >
+        <Section Name = "GetPrivateProfileString" >
+            <Issue
+                Type = "Compile"
+                Number = "1016"
+            >Declaring a parameter 'As Any' is not supported.</Issue>
+        </Section>
+        <Section Name = "WritePrivateProfileString" >
+            <Issue
+                Type = "Compile"
+                Number = "1016"
+            >Declaring a parameter 'As Any' is not supported.</Issue>
+        </Section>
+        <Section Name = "HandleQuotes" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes.</Issue>
+        </Section>
+        <Section Name = "GetFAC" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object GetFAC.</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "CopyStandingArray" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arr1(i).</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsLineup.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsLineup.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    >
+        <Section Name = "(Declarations)" >
+            <Issue
+                Type = "Runtime"
+                Number = "1033"
+            >Lower bound of array mvarHitters was changed from 1 to 0.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmPitching.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmPitching.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "(Layout)" >
+            <Issue
+                Type = "Design"
+                Number = "2045"
+                ObjectName = "lblRR_15"
+                ObjectType = "Label"
+                PME = "Font"
+            >Only TrueType and OpenType fonts are supported in Windows Forms.</Issue>
+        </Section>
+        <Section Name = "lstPitchers_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2075"
+            >Event lstPitchers.SelectedIndexChanged may fire when form is intialized.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmMain.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmMain.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "(Layout)" >
+            <Issue
+                Type = "Design"
+                Number = "2045"
+                ObjectName = "lblRR_1"
+                ObjectType = "Label"
+                PME = "Font"
+            >Only TrueType and OpenType fonts are supported in Windows Forms.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2056"
+                ObjectName = "cmbVisPos_0"
+                ObjectType = "ComboBox"
+                PME = "ItemData"
+            >ComboBox property cmbVisPos.ItemData was not upgraded.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2056"
+                ObjectName = "cmbHomePos_0"
+                ObjectType = "ComboBox"
+                PME = "ItemData"
+            >ComboBox property cmbHomePos.ItemData was not upgraded.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2064"
+                ObjectName = "picVisitor"
+                ObjectType = "PictureBox"
+                PME = "ScaleHeight"
+            >PictureBox property picVisitor.ScaleHeight was not upgraded.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2064"
+                ObjectName = "picVisitor"
+                ObjectType = "PictureBox"
+                PME = "ScaleMode"
+            >PictureBox property picVisitor.ScaleMode was not upgraded.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2064"
+                ObjectName = "picVisitor"
+                ObjectType = "PictureBox"
+                PME = "ScaleWidth"
+            >PictureBox property picVisitor.ScaleWidth was not upgraded.</Issue>
+            <Issue
+                Type = "Design"
+                Number = "2064"
+                ObjectName = "cmdTime"
+                ObjectType = "CommandButton"
+                PME = "MaskColor"
+            >CommandButton property cmdTime.MaskColor was not upgraded.</Issue>
+        </Section>
+        <Section Name = "cmbHomePos_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2075"
+            >Event cmbHomePos.SelectedIndexChanged may fire when form is intialized.</Issue>
+        </Section>
+        <Section Name = "cmbVisPos_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2075"
+            >Event cmbVisPos.SelectedIndexChanged may fire when form is intialized.</Issue>
+        </Section>
+        <Section Name = "Form_Load" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+        </Section>
+        <Section Name = "DisplayDecisions" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "Form_QueryUnload" >
+            <Issue
+                Type = "Runtime"
+                Number = "2065"
+                ObjectName = "frmMain"
+                ObjectType = "Form"
+                PME = "QueryUnload"
+            >Form event frmMain.QueryUnload has a new behavior.</Issue>
+        </Section>
+        <Section Name = "UpdateStatLine" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsBase.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsBase.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsGame.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsGame.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    >
+        <Section Name = "GetLineScore" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object intInning.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object intHome.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmAdvance.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmAdvance.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "cmdYes_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object structFAC.</Issue>
+        </Section>
+        <Section Name = "Form_Load" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object structFAC.</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsResult.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsResult.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    >
+        <Section Name = "ChartLookup" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1049"
+                PME = "IsNull"
+            >Use of Null/IsNull() detected.</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsStat.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsStat.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsPitStat.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsPitStat.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    />
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmDebugCard.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmDebugCard.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "(Layout)" >
+            <Issue
+                Type = "Design"
+                Number = "2065"
+                ObjectName = "txtCARDID"
+                ObjectType = "TextBox"
+                PME = "MaxLength"
+            >TextBox property txtCARDID.MaxLength has a new behavior.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmLineupChange.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmLineupChange.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "(Layout)" >
+            <Issue
+                Type = "Design"
+                Number = "2045"
+                ObjectName = "lbl1B8_3"
+                ObjectType = "Label"
+                PME = "Font"
+            >Only TrueType and OpenType fonts are supported in Windows Forms.</Issue>
+        </Section>
+        <Section Name = "chkAddPositions_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2075"
+            >Event chkAddPositions.CheckStateChanged may fire when form is intialized.</Issue>
+        </Section>
+        <Section Name = "fraBatter_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "2050"
+                ObjectName = "fraBatter"
+                ObjectType = "Frame"
+                PME = "Click"
+            >Frame Event fraBatter.Click was not upgraded.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\clsSeason.cls"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\clsSeason.vb"
+        FileType = "Class Module"
+        Upgraded = "True"
+    >
+        <Section Name = "LoadTeamsFromSched" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+                PME = "Val"
+            >Couldn't resolve default property of object GetIniString().</Issue>
+        </Section>
+        <Section Name = "UpdateHitting" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+        </Section>
+        <Section Name = "UpdatePitching" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+        </Section>
+        <Section Name = "UpdateStandings" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+        </Section>
+        <Section Name = "UpdatePSStandings" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+        </Section>
+        <Section Name = "DeterminePSTeams" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+            >Mod has a new behavior.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\modGameEngine.bas"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\modGameEngine.vb"
+        FileType = "Module"
+        Upgraded = "True"
+    >
+        <Section Name = "GetResult" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object FACCard.</Issue>
+        </Section>
+        <Section Name = "DetermineInjGames" >
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object FACCard.</Issue>
+        </Section>
+        <Section Name = "LoadData" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmRoster.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmRoster.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "cmdDisplay_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "cmdSubmit_Click" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object HandleQuotes().</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "Form_Load" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+        </Section>
+    </File>
+    <File
+        OldPath = "C:\documents\BBBackupsDotNet\frmStats.frm"
+        NewPath = "C:\documents\BBBackupsDotNet\StatisProBaseball.NET\frmStats.vb"
+        FileType = "Form"
+        Upgraded = "True"
+    >
+        <Section Name = "ShowStandings" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arrALEast(intRow).</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arrALWest(intRow).</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arrNLEast(intRow).</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arrNLWest(intRow).</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arrALCentral(intRow).</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object arrNLCentral(intRow).</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "GetTeamStats" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1049"
+                PME = "IsNull"
+            >Use of Null/IsNull() detected.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1037"
+            >Couldn't resolve default property of object colGames.Item().</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "GetSumHittingStats" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1049"
+                PME = "IsNull"
+            >Use of Null/IsNull() detected.</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "GetSumPitchingStats" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+            <Issue
+                Type = "Runtime"
+                Number = "1049"
+                PME = "IsNull"
+            >Use of Null/IsNull() detected.</Issue>
+            <Issue
+                Type = "Compile"
+                Number = "2049"
+                PME = "vbNormal"
+            >Unable to determine which constant to upgrade vbNormal to.</Issue>
+        </Section>
+        <Section Name = "Form_Load" >
+            <Issue
+                Type = "Runtime"
+                Number = "1041"
+                PME = "Dir"
+            >Dir has a new behavior.</Issue>
+        </Section>
+    </File>
+</UpgradeLog>
+

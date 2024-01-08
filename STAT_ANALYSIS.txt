@@ -1,0 +1,15 @@
+Notes after 1996:
+Runs are down in AL, 11794 from real of 12208
+Remedy: Improve SAC, lower DP, Reduce out errors, increase sac flies, improve odds of taking extra bases by 2 points
+
+Sac Flies are half of real
+Remedy: Replace DP ground balls with fly outs in FAC, improve OBR on 3rd ratings
+
+Sac Bunts are down 67% of real
+Remedy: Partially by choice, but will improve ratings to make more attactive
+
+Double Plays are over 25% of real
+Remedy: Make sac bunts more attractive, replace DP ground balls with fly balls
+
+Errors are way down from real
+Remedy: Add more error possibilities to OF out chances (very rare before)
