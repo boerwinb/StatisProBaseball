@@ -756,7 +756,7 @@ Module modGameEngine
                                         .PitStatPtr.er += 1
                                     End If
                                 End With
-                                If Game.PTeam.pr > 0 And SecondBase.pitcher = Game.PTeam.pitcherSel And Not isPOE Then
+                                If Game.PTeam.pr > 0 And SecondBase.pitcher = Game.PTeam.pitcherSel And Not isPOE And Not SecondBase.autoRunner Then
                                     'reduce PR by 1
                                     Game.PTeam.pr = Game.PTeam.pr - 1
                                 End If
@@ -770,7 +770,7 @@ Module modGameEngine
                                         .PitStatPtr.er += 1
                                     End If
                                 End With
-                                If Game.PTeam.pr > 0 And ThirdBase.pitcher = Game.PTeam.pitcherSel And Not isPOE Then
+                                If Game.PTeam.pr > 0 And ThirdBase.pitcher = Game.PTeam.pitcherSel And Not isPOE And Not ThirdBase.autoRunner Then
                                     'reduce PR by 1
                                     Game.PTeam.pr = Game.PTeam.pr - 1
                                 End If
@@ -811,6 +811,15 @@ Module modGameEngine
                     ThirdBase.Clear()
                     'Switch sides or game over
                     bolFinal = Game.SwitchTeams(False) Or Game.GameOver
+                    If bolAutomaticRunner And Game.inning > 9 And Not bolFinal Then
+                        'start inning with automatic runner on 2nd base
+                        SecondBase.occupied = True
+                        'previous person in the lineup is now on 2nd
+                        SecondBase.runner = Game.BTeam.GetPlayerNum(IIF(Game.BTeam.order = 1, 9, Game.BTeam.order - 1))
+                        SecondBase.pitcher = Game.PTeam.pitcherSel
+                        SecondBase.unearned = True
+                        SecondBase.autoRunner = True
+                    End If
                 Else
                     With Game.GetResultPtr
                         If .resBatter = 0 Then numOuts += 1
@@ -857,6 +866,7 @@ Module modGameEngine
                             ThirdBase.runner = SecondBase.runner
                             ThirdBase.pitcher = SecondBase.pitcher
                             ThirdBase.unearned = SecondBase.unearned
+                            ThirdBase.autoRunner = SecondBase.autoRunner
                         End If
                     End If
                     If FirstBase.occupied Then
@@ -1208,6 +1218,48 @@ Module modGameEngine
             End If
         End With
         Return highestSingleNumberOnCard
+    End Function
+
+    ''' <summary>
+    ''' determines the highest double (base hit) number on hitter card
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function HighDoubleNum() As Integer
+        Dim highestDoubleNumberOnCard As Integer
+        With Game.BTeam.GetBatterPtr(Game.currentBatter)
+            If .hit2B9.Trim <> Nothing Then
+                highestDoubleNumberOnCard = CInt(Val(.hit2B9.Substring(.hit2B9.Length - 2)))
+            ElseIf .hit2B8.Trim <> Nothing Then
+                highestDoubleNumberOnCard = CInt(Val(.hit2B8.Substring(.hit2B8.Length - 2)))
+            ElseIf .hit2B7.Trim <> Nothing Then
+                highestDoubleNumberOnCard = CInt(Val(.hit2B7.Substring(.hit2B7.Length - 2)))
+            Else
+                highestDoubleNumberOnCard = 0
+            End If
+        End With
+        Return highestDoubleNumberOnCard
+    End Function
+
+    ''' <summary>
+    ''' determines the lowest double (base hit) number on hitter card
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function LowDoubleNum() As Integer
+        Dim lowestDoubleNumberOnCard As Integer
+        With Game.BTeam.GetBatterPtr(Game.currentBatter)
+            If .hit2B7.Trim <> Nothing Then
+                lowestDoubleNumberOnCard = CInt(Val(.hit2B7.Substring(0, 2)))
+            ElseIf .hit2B8.Trim <> Nothing Then
+                lowestDoubleNumberOnCard = CInt(Val(.hit2B8.Substring(0, 2)))
+            ElseIf .hit2B9.Trim <> Nothing Then
+                lowestDoubleNumberOnCard = CInt(Val(.hit2B9.Substring(0, 2)))
+            Else
+                lowestDoubleNumberOnCard = 0
+            End If
+        End With
+        Return lowestDoubleNumberOnCard
     End Function
 
     ''' <summary>
@@ -4380,13 +4432,17 @@ Module modGameEngine
             If rndNum = 1 Then
                 With Game.BTeam.GetBatterPtr(Game.currentBatter)
                     'Only enabled 25% of the time. Move this up later after bug checking
+                    Call MsgBox("Excessive batter variance. Replacing " & highVariance & " with " & lowVariance)
                     Select Case lowVariance
                         Case "1B"
                             lowRange = 11
                             highRange = HighSingleNum()
                             numIncidents = GetRangeIncidents(lowRange, highRange)
                         Case "2B"
-                            numIncidents = DetermineCardNumbers(.hit2B8, lowRange, highRange)
+                            lowRange = LowDoubleNum()
+                            highRange = HighDoubleNum()
+                            numIncidents = GetRangeIncidents(lowRange, highRange)
+                            'numIncidents = DetermineCardNumbers(.hit2B8, lowRange, highRange)
                         Case "3B"
                             numIncidents = DetermineCardNumbers(.hit3B8, lowRange, highRange)
                         Case "HR"
@@ -4429,6 +4485,11 @@ Module modGameEngine
         Dim numIncidents As Integer
         Dim lowRange As Integer
         Dim highRange As Integer
+        Dim rndChances As Integer
+
+        If "BK|WP|PB".IndexOf(Left(playResult, 2)) >= 0 Or playResult = conNoPlay Then
+            Exit Sub
+        End If
 
         If "1B".IndexOf(Left(playResult, 2)) >= 0 Then
             currentResult = playResult.Substring(0, 2)
@@ -4440,9 +4501,20 @@ Module modGameEngine
 
         GetPitcherVariances(lowVariance, highVariance)
         If currentResult = highVariance And lowVariance <> "" Then
+            Select Case Game.PTeam.GetPitcherPtr(Game.PTeam.pitcherSel).pbRange
+                Case "2-5"
+                    rndChances = 3
+                Case "2-6", "2-7"
+                    rndChances = 4
+                Case "2-8"
+                    rndChances = 5
+                Case "2-9"
+                    rndChances = 6
+            End Select
             Randomize()
-            rndNum = Convert.ToInt32(4 * Rnd() + 1)
+            rndNum = Convert.ToInt32(rndChances * Rnd() + 1)
             If rndNum = 1 Then
+                Call MsgBox("Excessive pitcher variance. Replacing " & highVariance & " with " & lowVariance)
                 With Game.BTeam.GetBatterPtr(Game.currentBatter)
                     'Only enabled 25% of the time. Move this up later after bug checking
                     Select Case lowVariance
@@ -4545,7 +4617,7 @@ Module modGameEngine
             If variance > highVar Then
                 highVar = variance
                 highVariance = "1B"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "1B"
             End If
@@ -4605,7 +4677,7 @@ Module modGameEngine
             If variance > highVar Then
                 highVar = variance
                 highVariance = "K"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "K"
             End If
@@ -4617,7 +4689,7 @@ Module modGameEngine
             If variance > highVar Then
                 highVar = variance
                 highVariance = "W"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "W"
             End If
@@ -4629,7 +4701,7 @@ Module modGameEngine
             If variance > highVar Then
                 highVar = variance
                 highVariance = "OUT"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "OUT"
             End If
@@ -4686,75 +4758,75 @@ Module modGameEngine
             'Determine variances for card outcomes 1B|K|W|OUT
             cardNumCurrent = DetermineCardNumbers(.hit1Bf, 0, 0) + DetermineCardNumbers(.hit1B7, 0, 0) + DetermineCardNumbers(.hit1B8, 0, 0) + DetermineCardNumbers(.hit1B9, 0, 0)
             cardNumProjected = (baseHits * Game.PTeam.singlePct) * 128 / outcomes - Game.PTeam.adjSingle
-            Select Case .pb
+            Select Case .pbRange
                 'make adjustments by pb rating
                 Case "2-9"
-                    cardNumProjected = CInt((0.334 * cardNumProjected + 8.81) * (62 / 64))
+                    cardNumProjected = (0.334 * cardNumProjected + 8.81) * (62 / 64)
                 Case "2-8"
-                    cardNumProjected = CInt((0.556 * cardNumProjected + 6.07) * (62 / 64))
+                    cardNumProjected = (0.556 * cardNumProjected + 6.07) * (62 / 64)
                 Case "2-7"
-                    cardNumProjected = CInt((0.833 * cardNumProjected + 1.88) * (62 / 64))
+                    cardNumProjected = (0.833 * cardNumProjected + 1.88) * (62 / 64)
                 Case "2-6"
-                    cardNumProjected = CInt(((cardNumProjected - 3.68) / 0.833) * (62 / 64))
+                    cardNumProjected = ((cardNumProjected - 3.68) / 0.833) * (62 / 64)
                 Case "2-5"
-                    cardNumProjected = CInt(((cardNumProjected - 7.89) / 0.556) * (62 / 64))
+                    cardNumProjected = ((cardNumProjected - 7.89) / 0.556) * (62 / 64)
             End Select
             cumProjected += cardNumProjected
             variance = cardNumProjected - cardNumCurrent
             If variance > highVar Then
                 highVar = variance
                 highVariance = "1B"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "1B"
             End If
 
             cardNumCurrent = DetermineCardNumbers(.k, 0, 0)
             cardNumProjected = strikeouts * 128 / outcomes - Game.PTeam.adjK
-            Select Case .pb
+            Select Case .pbRange
                 'make adjustments by pb rating
                 Case "2-9"
-                    cardNumProjected = CInt((0.334 * cardNumProjected + 6.62) * (62 / 64))
+                    cardNumProjected = (0.334 * cardNumProjected + 6.62) * (62 / 64)
                 Case "2-8"
-                    cardNumProjected = CInt((0.556 * cardNumProjected + 4.48) * (62 / 64))
+                    cardNumProjected = (0.556 * cardNumProjected + 4.48) * (62 / 64)
                 Case "2-7"
-                    cardNumProjected = CInt((0.833 * cardNumProjected + 0.99) * (62 / 64))
+                    cardNumProjected = (0.833 * cardNumProjected + 0.99) * (62 / 64)
                 Case "2-6"
-                    cardNumProjected = CInt(((cardNumProjected - 2.82) / 0.833) * (62 / 64))
+                    cardNumProjected = ((cardNumProjected - 2.82) / 0.833) * (62 / 64)
                 Case "2-5"
-                    cardNumProjected = CInt(((cardNumProjected - 4.63) / 0.556) * (62 / 64))
+                    cardNumProjected = ((cardNumProjected - 4.63) / 0.556) * (62 / 64)
             End Select
             cumProjected += cardNumProjected
             variance = cardNumProjected - cardNumCurrent
             If variance > highVar Then
                 highVar = variance
                 highVariance = "K"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "K"
             End If
 
             cardNumCurrent = DetermineCardNumbers(.w, 0, 0)
             cardNumProjected = walks * 128 / outcomes - Game.PTeam.adjBB
-            Select Case .pb
+            Select Case .pbRange
                 'make adjustments by pb rating
                 Case "2-9"
-                    cardNumProjected = CInt((0.334 * cardNumProjected + 3.03) * (62 / 64))
+                    cardNumProjected = (0.334 * cardNumProjected + 3.03) * (62 / 64)
                 Case "2-8"
-                    cardNumProjected = CInt((0.556 * cardNumProjected + 2.09) * (62 / 64))
+                    cardNumProjected = (0.556 * cardNumProjected + 2.09) * (62 / 64)
                 Case "2-7"
-                    cardNumProjected = CInt((0.833 * cardNumProjected + 0.93) * (62 / 64))
+                    cardNumProjected = (0.833 * cardNumProjected + 0.93) * (62 / 64)
                 Case "2-6"
-                    cardNumProjected = CInt(((cardNumProjected - 0.45) / 0.833) * (62 / 64))
+                    cardNumProjected = ((cardNumProjected - 0.45) / 0.833) * (62 / 64)
                 Case "2-5"
-                    cardNumProjected = CInt(((cardNumProjected - 1.18) / 0.556) * (62 / 64))
+                    cardNumProjected = ((cardNumProjected - 1.18) / 0.556) * (62 / 64)
             End Select
             cumProjected += cardNumProjected
             variance = cardNumProjected - cardNumCurrent
             If variance > highVar Then
                 highVar = variance
                 highVariance = "W"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "W"
             End If
@@ -4766,7 +4838,7 @@ Module modGameEngine
             If variance > highVar Then
                 highVar = variance
                 highVariance = "OUT"
-            ElseIf variance < lowVar Then
+            ElseIf variance < lowVar And cardNumCurrent > 0 Then
                 lowVar = variance
                 lowVariance = "OUT"
             End If

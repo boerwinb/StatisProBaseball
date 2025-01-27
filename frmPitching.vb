@@ -49,12 +49,12 @@ Friend Class frmPitching
     'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.lstPitchers = New System.Windows.Forms.ListBox
-        Me.cmdHitting = New System.Windows.Forms.Button
-        Me.cmdOtherTeam = New System.Windows.Forms.Button
-        Me.cmdPlayBall = New System.Windows.Forms.Button
-        Me.pnlPitching = New System.Windows.Forms.Panel
-        Me.dgUsage = New System.Windows.Forms.DataGridView
+        Me.lstPitchers = New System.Windows.Forms.ListBox()
+        Me.cmdHitting = New System.Windows.Forms.Button()
+        Me.cmdOtherTeam = New System.Windows.Forms.Button()
+        Me.cmdPlayBall = New System.Windows.Forms.Button()
+        Me.pnlPitching = New System.Windows.Forms.Panel()
+        Me.dgUsage = New System.Windows.Forms.DataGridView()
         CType(Me.dgUsage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -420,6 +420,17 @@ Friend Class frmPitching
         Try
             If lstPitchers.SelectedItems.Count > 0 Then
                 isNewPitcher = Team.pitcherSel <> Team.GetPIndexFromName(lstPitchers.SelectedItem.ToString)
+                If Team.pitcherSel > 0 Then
+                    'A pitcher is being replaced
+                    With Team.GetPitcherPtr(Team.pitcherSel)
+                        If bol3BatterMinimum And isNewPitcher And .PitStatPtr.bf < 3 And .PitStatPtr.bfCurrentInning > 0 Then
+                            'Check if the rule is enabled, detect an attempt to change the pitcher, check batters faced, and then
+                            'check for ejections (.available)
+                            Call MsgBox("Pitcher must face a minimum of 3 batters or end the inning.", MsgBoxStyle.OkOnly)
+                            Exit Sub
+                        End If
+                    End With
+                End If
                 Team.pitcherSel = Team.GetPIndexFromName(lstPitchers.SelectedItem.ToString)
                 Team.GetPitcherPtr(Team.pitcherSel).available = False 'Set so that they cannot reenter
                 If Not bolAmericanLeagueRules Then
@@ -499,4 +510,6 @@ Friend Class frmPitching
         End If
         pbRange = "2-" & pbHigh.ToString
     End Sub
+
+   
 End Class

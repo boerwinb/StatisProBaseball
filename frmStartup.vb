@@ -394,6 +394,7 @@ Friend Class frmStartup
             If gbolSeasonOver Then
                 'season is over
                 Me.Close()
+                End
                 Exit Sub
             End If
             Call LoadData(Home)

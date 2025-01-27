@@ -55,6 +55,8 @@ Friend Class clsSeason
             Else
                 bolAmericanLeagueRules = ((league = "AL") And CInt(season) >= 1973) Or CInt(gstrSeason) >= 2022
             End If
+            bol3BatterMinimum = CInt(gstrSeason) >= 2021
+            bolAutomaticRunner = CInt(gstrSeason) >= 2021 And Not gbolPostSeason
             If gbolPostSeason Then
                 gstrHittingTable = "PSHITTINGSTATS"
                 gstrPitchingTable = "PSPITCHINGSTATS"
@@ -816,7 +818,8 @@ Friend Class clsSeason
                             DataAccess.ExecuteScalar(sqlQuery)
                         Next i
                         gstrPostSeason = conALCS
-                        bolAmericanLeagueRules = True
+                        'bolAmericanLeagueRules = True
+                        bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                         _game = 1
                     Else
                         sqlQuery = "Select * FROM PSStandings WHERE League = 'AL' " & _
@@ -878,7 +881,8 @@ Friend Class clsSeason
                                     End If
                             End Select
                             gstrPostSeason = conALCS
-                            bolAmericanLeagueRules = True
+                            'bolAmericanLeagueRules = True
+                            bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                             _game = gamesPlayed + 1
                         Else
                             sqlQuery = "Select * FROM PSStandings WHERE League = 'NL'" & "AND CSWins = " & csWinsNeeded.ToString
@@ -939,7 +943,8 @@ Friend Class clsSeason
                                         End If
                                 End Select
                                 gstrPostSeason = conNLCS
-                                bolAmericanLeagueRules = False
+                                'bolAmericanLeagueRules = False
+                                bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                 _game = gamesPlayed + 1
                             Else
                                 sqlQuery = "Select * FROM PSStandings WHERE WSWins = 4"
@@ -961,7 +966,8 @@ Friend Class clsSeason
                                     Select Case gamesPlayed
                                         Case 0, 1, 5, 6
                                             If isALWestHome Then
-                                                bolAmericanLeagueRules = True
+                                                'bolAmericanLeagueRules = True
+                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                                 If playoffTeam(1).league = "AL" Then
                                                     homeTeam = playoffTeam(1).name
                                                     visitingTeam = playoffTeam(2).name
@@ -970,7 +976,8 @@ Friend Class clsSeason
                                                     visitingTeam = playoffTeam(1).name
                                                 End If
                                             Else
-                                                bolAmericanLeagueRules = False
+                                                'bolAmericanLeagueRules = False
+                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                                 If playoffTeam(1).league = "AL" Then
                                                     homeTeam = playoffTeam(2).name
                                                     visitingTeam = playoffTeam(1).name
@@ -981,7 +988,8 @@ Friend Class clsSeason
                                             End If
                                         Case 2, 3, 4
                                             If isALWestHome Then
-                                                bolAmericanLeagueRules = False
+                                                'bolAmericanLeagueRules = False
+                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                                 If playoffTeam(1).league = "AL" Then
                                                     homeTeam = playoffTeam(2).name
                                                     visitingTeam = playoffTeam(1).name
@@ -990,7 +998,8 @@ Friend Class clsSeason
                                                     visitingTeam = playoffTeam(2).name
                                                 End If
                                             Else
-                                                bolAmericanLeagueRules = True
+                                                'bolAmericanLeagueRules = True
+                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                                 If playoffTeam(1).league = "AL" Then
                                                     homeTeam = playoffTeam(1).name
                                                     visitingTeam = playoffTeam(2).name
@@ -1812,7 +1821,8 @@ Friend Class clsSeason
                             DataAccess.ExecuteScalar(sqlQuery)
                         Next i
                         gstrPostSeason = IIF(Val(gstrSeason) >= 2012, conALWC, conALDIV1)
-                        bolAmericanLeagueRules = True
+                        'bolAmericanLeagueRules = True
+                        bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                         _game = 1
                     Else
                         sqlQuery = "Select * FROM PSStandings WHERE beginseries = '" & conALDIV1 & "' " & "AND DSWins = 3"
@@ -1836,7 +1846,8 @@ Friend Class clsSeason
                                     Next dr
                                     gbolNewPS = True
                                     gstrPostSeason = conALWC
-                                    bolAmericanLeagueRules = True
+                                    'bolAmericanLeagueRules = True
+                                    bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                 Else
                                     'Check for NL WC
                                     sqlQuery = "Select * FROM PSStandings WHERE beginseries = '" & conNLWC & "'"
@@ -1854,7 +1865,8 @@ Friend Class clsSeason
                                         Next dr
                                         gbolNewPS = True
                                         gstrPostSeason = conNLWC
-                                        bolAmericanLeagueRules = False
+                                        'bolAmericanLeagueRules = False
+                                        bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                     End If
                                 End If
                                 If gstrPostSeason = conALWC Or gstrPostSeason = conNLWC Then
@@ -1903,7 +1915,8 @@ Friend Class clsSeason
                                         End If
                                 End Select
                                 gstrPostSeason = conALDIV1
-                                bolAmericanLeagueRules = True
+                                'bolAmericanLeagueRules = True
+                                bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                 _game = gamesPlayed + 1
                             End If
                         Else
@@ -1946,7 +1959,8 @@ Friend Class clsSeason
                                         End If
                                 End Select
                                 gstrPostSeason = conALDIV2
-                                bolAmericanLeagueRules = True
+                                'bolAmericanLeagueRules = True
+                                bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                 _game = gamesPlayed + 1
                             Else
                                 sqlQuery = "Select * FROM PSStandings WHERE beginseries = '" & conNLDIV1 & "' " & "AND DSWins = 3"
@@ -1988,7 +2002,8 @@ Friend Class clsSeason
                                             End If
                                     End Select
                                     gstrPostSeason = conNLDIV1
-                                    bolAmericanLeagueRules = False
+                                    'bolAmericanLeagueRules = False
+                                    bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                     _game = gamesPlayed + 1
                                 Else
                                     sqlQuery = "Select * FROM PSStandings WHERE beginseries = '" & conNLDIV2 & "' " & "AND DSWins = 3"
@@ -2030,7 +2045,8 @@ Friend Class clsSeason
                                                 End If
                                         End Select
                                         gstrPostSeason = conNLDIV2
-                                        bolAmericanLeagueRules = False
+                                        'bolAmericanLeagueRules = False
+                                        bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                         _game = gamesPlayed + 1
                                     Else
                                         sqlQuery = "Select * FROM PSStandings WHERE league = 'AL' " & "AND CSWins = 4"
@@ -2072,7 +2088,8 @@ Friend Class clsSeason
                                                     End If
                                             End Select
                                             gstrPostSeason = conALCS
-                                            bolAmericanLeagueRules = True
+                                            'bolAmericanLeagueRules = True
+                                            bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                             _game = gamesPlayed + 1
                                         Else
                                             sqlQuery = "Select * FROM PSStandings WHERE league = 'NL' " & "AND CSWins = 4"
@@ -2114,7 +2131,8 @@ Friend Class clsSeason
                                                         End If
                                                 End Select
                                                 gstrPostSeason = conNLCS
-                                                bolAmericanLeagueRules = False
+                                                'bolAmericanLeagueRules = False
+                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                                 _game = gamesPlayed + 1
                                             Else
                                                 sqlQuery = "Select * FROM PSStandings WHERE WSWins = 4"
@@ -2149,7 +2167,8 @@ Friend Class clsSeason
                                                     Select Case gamesPlayed
                                                         Case 0, 1, 5, 6
                                                             If isALHome Then
-                                                                bolAmericanLeagueRules = True
+                                                                'bolAmericanLeagueRules = True
+                                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                                                 If playoffTeam(1).league = "AL" Then
                                                                     homeTeam = playoffTeam(1).name
                                                                     visitingTeam = playoffTeam(2).name
@@ -2158,7 +2177,8 @@ Friend Class clsSeason
                                                                     visitingTeam = playoffTeam(1).name
                                                                 End If
                                                             Else
-                                                                bolAmericanLeagueRules = False
+                                                                'bolAmericanLeagueRules = False
+                                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                                                 If playoffTeam(1).league = "AL" Then
                                                                     homeTeam = playoffTeam(2).name
                                                                     visitingTeam = playoffTeam(1).name
@@ -2169,7 +2189,8 @@ Friend Class clsSeason
                                                             End If
                                                         Case 2, 3, 4
                                                             If isALHome Then
-                                                                bolAmericanLeagueRules = False
+                                                                'bolAmericanLeagueRules = False
+                                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                                                                 If playoffTeam(1).league = "AL" Then
                                                                     homeTeam = playoffTeam(2).name
                                                                     visitingTeam = playoffTeam(1).name
@@ -2178,7 +2199,8 @@ Friend Class clsSeason
                                                                     visitingTeam = playoffTeam(2).name
                                                                 End If
                                                             Else
-                                                                bolAmericanLeagueRules = True
+                                                                'bolAmericanLeagueRules = True
+                                                                bolAmericanLeagueRules = CInt(gstrSeason) >= 1973
                                                                 If playoffTeam(1).league = "AL" Then
                                                                     homeTeam = playoffTeam(1).name
                                                                     visitingTeam = playoffTeam(2).name
@@ -2206,7 +2228,8 @@ Friend Class clsSeason
                     End If
                 Case Is < 1969
                     numberOfTeams = 2
-                    bolAmericanLeagueRules = False
+                    'bolAmericanLeagueRules = False
+                    bolAmericanLeagueRules = CInt(gstrSeason) >= 2022
                     sqlQuery = "Select Division, League, CSWins, TeamID " & "FROM PSStandings"
                     dsStandings = DataAccess.ExecuteDataSet(sqlQuery)
                     If dsStandings.Tables(0).Rows.Count = 0 Then

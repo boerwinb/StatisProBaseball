@@ -25,6 +25,8 @@ Module modConstants
     Public Const conNLPos As String = "P|C|1B|2B|3B|SS|LF|CF|RF|"
 
     Public bolAmericanLeagueRules As Boolean
+    Public bol3BatterMinimum As Boolean
+    Public bolAutomaticRunner As Boolean
     Public gbolSeason As Boolean
     Public gbolSeasonOver As Boolean
     Public gbolHalfSeason As Boolean
@@ -224,6 +226,7 @@ Module modConstants
     Public Const conNLHomeRow As Integer = 16
 
     Public bolInPlay As Boolean
+    Public bolThreadActive As Boolean
     Public lastInvoked As DateTime
 
     'Used for the description log

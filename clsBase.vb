@@ -6,6 +6,7 @@ Friend Class clsBase
     Private _runnerIndex As Integer
     Private _pitcherIndex As Integer
     Private _isUnearned As Boolean
+    Private _autoRunner As Boolean
 
     Public Property occupied() As Boolean
         Get
@@ -43,11 +44,22 @@ Friend Class clsBase
         End Set
     End Property
 
+    Public Property autoRunner() As Boolean
+        Get
+            autoRunner = _autoRunner
+        End Get
+        Set(ByVal Value As Boolean)
+            _autoRunner = Value
+        End Set
+    End Property
+
+
     Public Sub Clear()
         _runnerIndex = 0
         _pitcherIndex = 0
         _occupied = False
         _isUnearned = False
+        _autoRunner = False
     End Sub
 
     Public Sub New()

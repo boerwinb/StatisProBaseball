@@ -1223,6 +1223,12 @@ Friend Class frmMain
             '    Exit Sub
             'End If
             'lastInvoked = Now
+            If bolThreadActive Then
+                'block multiple mouse clicks
+                Exit Sub
+            Else
+                bolThreadActive = True
+            End If
             If bolInPlay Then
                 bolInPlay = False
                 Exit Sub
@@ -1345,11 +1351,12 @@ Friend Class frmMain
                 DisplayDecisions()
             End If
             bolInPlay = False
+            bolThreadActive = False
             'Write Code for DP stats and IP correction
         Catch ex As Exception
             Call MsgBox("Error in cmdPitch_Click " & ex.ToString, MsgBoxStyle.OkOnly)
-            'Finally
-            '    lastInvoked = Now
+        Finally
+            bolThreadActive = False
         End Try
     End Sub
 
@@ -2242,7 +2249,14 @@ Friend Class frmMain
             If Not bolAnyBS Then
                 If isSwitch Then
                     Me.lblFirst.Text = ""
-                    Me.lblSecond.Text = ""
+                    If SecondBase.occupied Then
+                        'automatic runner rule
+                        With Game.BTeam.GetBatterPtr(SecondBase.runner)
+                            Me.lblSecond.Text = GetLastName(.player) & Space(1) & .obr & Space(1) & .sp
+                        End With
+                    Else
+                        Me.lblSecond.Text = ""
+                    End If
                     Me.lblThird.Text = ""
                     If bolFinal Then
                         Me.grpBatterHome.BackColor = System.Drawing.Color.White

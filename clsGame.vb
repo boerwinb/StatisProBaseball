@@ -380,6 +380,11 @@ Friend Class clsGame
                 .wp = .wp + _result.wp
                 .hb = .hb + _result.hpb
                 .bk = .bk + _result.bk
+                If Not _result.description.Contains("SBR") Then
+                    'increment batters faced, unless there was a stolen base attempt
+                    .bf = .bf + 1
+                    .bfCurrentInning = IIF(Game.outs < 3, .bfCurrentInning + 1, 0)
+                End If
                 If _BTeam.order = 1 And _BTeam.runs < 2 And _inning = 1 Then
                     'first batter
                     .starts = 1

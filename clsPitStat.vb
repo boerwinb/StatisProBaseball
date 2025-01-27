@@ -26,6 +26,8 @@ Friend Class clsPitStat
     Private _noHit As Integer
     Private _oneHit As Integer
     Private _perfect As Integer
+    Private _bf As Integer
+    Private _bfCurrentInning As Integer
     Private _inactive As Boolean
     Private _gamesInj As Integer
 
@@ -221,6 +223,22 @@ Friend Class clsPitStat
             _perfect = Value
         End Set
     End Property
+    Public Property bf() As Integer
+        Get
+            bf = _bf
+        End Get
+        Set(ByVal Value As Integer)
+            _bf = Value
+        End Set
+    End Property
+    Public Property bfCurrentInning() As Integer
+        Get
+            bfCurrentInning = _bfCurrentInning
+        End Get
+        Set(ByVal Value As Integer)
+            _bfCurrentInning = Value
+        End Set
+    End Property
     Public Property inactive() As Boolean
         Get
             Inactive = _inactive
@@ -263,6 +281,8 @@ Friend Class clsPitStat
         _noHit = 0
         _oneHit = 0
         _perfect = 0
+        _bf = 0
+        _bfCurrentInning = 0
         _inactive = False
         _gamesInj = 0
     End Sub

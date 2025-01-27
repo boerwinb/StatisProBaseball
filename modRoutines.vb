@@ -589,19 +589,26 @@ Module modRoutines
     End Function
 
     ''' <summary>
-    ''' Grabs current game in season from the registry
+    ''' Grabs current game in season from the database
     ''' </summary>
     ''' <param name="Season"></param>
     ''' <param name="gamenumber"></param>
     ''' <param name="rownumber">row number in the .scd file</param>
     ''' <remarks></remarks>
     Public Sub GetGame(ByVal season As String, ByRef gameNumber As Integer, ByRef rowNumber As String)
-        Dim regKey As String = REGISTRY_LOCAL_MACHINE & "\" & SPB_REG_KEY & "\" & season
-
+        'Dim regKey As String = REGISTRY_LOCAL_MACHINE & "\" & SPB_REG_KEY & "\" & season
+        Dim DataAccess As New clsDataAccess(season & "data")
+        Dim ds As DataSet = Nothing
+        Dim sqlQuery As String = ""
         Try
-            regKey = REGISTRY_LOCAL_MACHINE & "\" & SPB_REG_KEY & "\" & season
-            gameNumber = Integer.Parse(Registry.GetValue(regKey, "Game", 1).ToString)
-            rowNumber = Registry.GetValue(regKey, "SchedRow", 1).ToString
+            'regKey = REGISTRY_LOCAL_MACHINE & "\" & SPB_REG_KEY & "\" & season
+            'gameNumber = Integer.Parse(Registry.GetValue(regKey, "Game", 1).ToString)
+            'rowNumber = Registry.GetValue(regKey, "SchedRow", 1).ToString
+            sqlQuery = "Select schedrow, game FROM settings"
+            ds = DataAccess.ExecuteDataSet(sqlQuery)
+            rowNumber = ds.Tables(0).Rows(0).Item("schedrow").ToString
+            gameNumber = CInt(ds.Tables(0).Rows(0).Item("game").ToString)
+            ds.Clear()
         Catch ex As Exception
             Call MsgBox("Error in GetGame. " & ex.ToString & " " & season & " " & gameNumber.ToString & _
                         " " & rowNumber.ToString, MsgBoxStyle.OkOnly)
@@ -609,18 +616,22 @@ Module modRoutines
     End Sub
 
     ''' <summary>
-    ''' Updates the current game in season in the registry
+    ''' Updates the current game in season in the database
     ''' </summary>
     ''' <param name="season"></param>
     ''' <param name="gameNumber"></param>
     ''' <param name="rowNumber">row number in the .scd file</param>
     ''' <remarks></remarks>
     Public Sub SetGame(ByVal season As String, ByVal gameNumber As String, ByVal rowNumber As String)
-        Dim regKey As String = REGISTRY_LOCAL_MACHINE & "\" & SPB_REG_KEY & "\" & season
+        Dim DataAccess As New clsDataAccess(season & "data")
+        Dim sqlQuery As String = ""
+        'Dim regKey As String = REGISTRY_LOCAL_MACHINE & "\" & SPB_REG_KEY & "\" & season
 
         Try
-            Registry.SetValue(regKey, "SchedRow", rowNumber)
-            Registry.SetValue(regKey, "Game", gameNumber)
+            'Registry.SetValue(regKey, "SchedRow", rowNumber)
+            'Registry.SetValue(regKey, "Game", gameNumber)
+            sqlQuery = "UPDATE settings SET schedrow = " & rowNumber & ", game = " & gameNumber
+            DataAccess.ExecuteScalar(sqlQuery)
         Catch ex As Exception
             Call MsgBox("Error in SetGame. " & ex.ToString & " " & season & " " & gameNumber.ToString & _
                         " " & rowNumber.ToString, MsgBoxStyle.OkOnly)
