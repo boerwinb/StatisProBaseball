@@ -186,7 +186,7 @@ Friend Class clsSeason
             '    accessConn.ConnectionString = GetConnectString()
             '    accessConn.Open()
 
-            For i As Integer = 1 To conMaxBatters + IIF(bolAmericanLeagueRules, 0, 10)
+            For i As Integer = 1 To conMaxBatters ' + IIF(bolAmericanLeagueRules, 0, 10)
                 With team.GetBatterPtr(i).BatStatPtr
                     If team.GetBatterPtr(i).player <> Nothing Then
                         tableKey = HandleQuotes(StripChar(team.GetBatterPtr(i).player & team.teamName, " "))

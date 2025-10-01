@@ -3934,9 +3934,9 @@ Module modGameEngine
                         playResult += "16-23" & BaseSituation()
                     Case 16 To 18
                         playResult += "24-32" & BaseSituation()
-                    Case 21 To 23
+                    Case 21 To 24
                         playResult += "33-47" & BaseSituation()
-                    Case 24 To 35
+                    Case 25 To 35
                         If "YZ".IndexOf(Game.BTeam.GetBatterPtr(FirstBase.runner).sp) > -1 Then
                             playResult += "33-47" & BaseSituation()
                         Else

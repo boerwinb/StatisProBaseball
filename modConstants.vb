@@ -5,7 +5,7 @@ Imports System.Collections.Generic
 
 Module modConstants
 	' Team constants
-    Public Const conMaxBatters As Integer = 28
+    Public Const conMaxBatters As Integer = 38
     Public Const conMaxPitchers As Integer = 35
 
     ' Master Team Objects
@@ -36,6 +36,7 @@ Module modConstants
     Public gstrPostSeason As String
     Public bolHomeActive As Boolean
     Public maxRosterSize As Integer
+    Public twoWayPlayers As Integer
 
 
     Public Const conHome As Integer = 0

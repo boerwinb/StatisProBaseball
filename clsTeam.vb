@@ -238,7 +238,7 @@ Friend Class clsTeam
     Public Sub New()
         MyBase.New()
 
-        For i As Integer = 1 To conMaxBatters + IIF(bolAmericanLeagueRules, 0, 10)
+        For i As Integer = 1 To conMaxBatters ' + IIF(bolAmericanLeagueRules, 0, 10)
             _Batter(i) = New clsBatter
         Next i
         For i As Integer = 1 To conMaxPitchers
@@ -536,7 +536,7 @@ Friend Class clsTeam
             For Each dr As DataRow In ds.Tables(0).Rows
                 games += CInt(dr.Item("g"))
                 managerName = dr.Item("namefirst").ToString & " " & dr.Item("namelast").ToString
-                If games >= teamGames Then
+                If games > teamGames Then
                     Return managerName
                 End If
             Next dr

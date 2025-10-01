@@ -553,7 +553,17 @@ Friend Class frmRoster
                 FileClose(filDebug)
             End If
             maxRosterSize = IIF(CInt(gstrSeason) >= 2021, 26, 25)
-            If lstActivePP.Items.Count + lstActivePitchers.Items.Count > maxRosterSize Then
+            twoWayPlayers = 0
+
+            'Look for two-way players. They should not count against the roster max
+            For i As Integer = 0 To lstActivePP.Items.Count - 1
+                lstActivePP.Items.Item(i).ToString()
+                If lstActivePitchers.FindStringExact(lstActivePP.Items.Item(i).ToString()) > 0 Then
+                    twoWayPlayers += 1
+                End If
+            Next i
+
+            If lstActivePP.Items.Count + lstActivePitchers.Items.Count - twoWayPlayers > maxRosterSize Then
                 Call MsgBox("Roster size cannot exceed " & maxRosterSize.ToString & " players.", MsgBoxStyle.OkOnly)
                 Exit Sub
             End If
@@ -600,8 +610,8 @@ Friend Class frmRoster
                 tableKey = StripChar(lstActivePitchers.Items.Item(i).ToString & teamName, " ")
                 tableKey = HandleQuotes(tableKey)
                 If gbolNewPS Then
-                    sqlFields = "ACTIVE,PLAYERID"
-                    sqlValues = "1,'" & tableKey & "'"
+                    sqlFields = "ACTIVE,PLAYERID,LG1"
+                    sqlValues = "1,'" & tableKey & "',0"
                     sqlQuery = "INSERT INTO " & gstrPitchingTable & " (" & sqlFields & ") VALUES (" & sqlValues & ")"
                 Else
                     sqlQuery = "UPDATE " & gstrPitchingTable & " SET ACTIVE = 1 WHERE " & "PLAYERID = '" & tableKey & "'"
@@ -613,8 +623,8 @@ Friend Class frmRoster
                 tableKey = StripChar(lstInactivePitchers.Items.Item(i).ToString & teamName, " ")
                 tableKey = HandleQuotes(tableKey)
                 If gbolNewPS Then
-                    sqlFields = "INJ,ACTIVE,PLAYERID"
-                    sqlValues = "15,0,'" & tableKey & "'"
+                    sqlFields = "INJ,ACTIVE,PLAYERID,LG1"
+                    sqlValues = "15,0,'" & tableKey & "',0"
                     sqlQuery = "INSERT INTO " & gstrPitchingTable & " (" & sqlFields & ") VALUES (" & sqlValues & ")"
                 Else
                     sqlQuery = "UPDATE " & gstrPitchingTable & " SET INJ = 15, ACTIVE = 0 WHERE " & "PLAYERID = '" & tableKey & "' AND " & "ACTIVE = 1 AND " & "INJ < 15"
